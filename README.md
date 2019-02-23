@@ -1,2 +1,2 @@
-# employee-service
-Employee Service (Back end)
+# employees
+Employee- & Event-Service Coding Challenge
