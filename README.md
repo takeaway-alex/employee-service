@@ -57,3 +57,6 @@ java -jar ../TAEntityService/target/TAEventService-0.0.1.jar &
 npm run serve
 
 ```
+
+# Swagger
+[See here](https://github.com/takeaway-alex/employees/blob/master/TAEmployeeService/swagger.yaml)
