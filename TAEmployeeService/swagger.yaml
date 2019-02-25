@@ -1,0 +1,187 @@
+openapi: 3.0.0
+info:
+  description: "This is a API specification of Employee Service."
+  version: "1.0.0"
+  title: "Employee Service"
+  contact:
+    email: "a.furmanoff@gmail.com"
+tags:
+- name: "employee"
+  description: "Employee CRUD"
+- name: "employees"
+  description: "List of employees"
+- name: "department"
+  description: "Department CRUD"
+- name: "departments"
+  description: "List of departments"
+paths:
+  /employee:
+    post:
+      tags:
+      - "employee"
+      summary: "Add a new employee"
+      operationId: "addEmployee"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Employee"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "string"
+                description: "ID (UUID) of new employee"
+        500:
+          description: "Server error"
+
+    put:
+      tags:
+      - "employee"
+      summary: "Update an existing employee"
+      operationId: "updateEmployee"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Employee"
+      responses:
+        200:
+          description: "OK"
+        500:
+          description: "Server error"
+
+    get:
+      tags:
+      - "employee"
+      summary: "Get an existing employee"
+      operationId: "getEmployee"
+      parameters:
+      - in: query
+        name: "uuid"
+        schema:
+          type: "string"
+          format: "uuid"
+        description: "UUID of existing employee"
+        required: true
+      responses:
+        200:
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employee"
+        500:
+          description: "Server error"
+
+    delete:
+      tags:
+      - "employee"
+      summary: "Delete an existing employee"
+      operationId: "deleteEmployee"
+      parameters:
+      - in: query
+        name: "uuid"
+        schema:
+          type: "string"
+          format: "uuid"
+        description: "UUID of existing employee"
+      responses:
+        200:
+          description: "successful operation"
+        500:
+          description: "Server error"
+
+  /department:
+    post:
+      tags:
+      - "department"
+      summary: "Add a new department"
+      operationId: "addDepartment"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Department"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "integer"
+                format: "int64"
+                description: "ID of new department"
+        500:
+          description: "Server error"
+
+  /departments:
+    get:
+      tags:
+      - "departments"
+      summary: "Get list of existing departments"
+      operationId: "getDepartments"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Department"
+        500:
+          description: "Server error"
+
+  /employees:
+    get:
+      tags:
+      - "employees"
+      summary: "Get list of existing employees"
+      operationId: "getEmployees"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Employee"
+        500:
+          description: "Server error"
+
+components:
+  schemas:
+    Department:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+    Employee:
+      type: "object"
+      required:
+      - "email"
+      - "fullName"
+      - "birthday"
+      - "departmentId"
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        fullName:
+          type: "string"
+        birthday:
+          type: "string"
+          example: "1995-01-25"
+        departmentId:
+          type: "integer"
+          example: "int64"
