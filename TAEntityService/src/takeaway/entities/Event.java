@@ -41,7 +41,7 @@ public class Event implements Serializable {
 	}
 
 	public EventDto getEventDto() {
-		return new EventDto(action);
+		return new EventDto(action, timestamp);
 	}
 
 	public Long getId() {

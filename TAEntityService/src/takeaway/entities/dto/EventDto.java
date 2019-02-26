@@ -17,6 +17,12 @@ public class EventDto {
 		this.timestamp = System.currentTimeMillis();
 	}
 
+	public EventDto(String action, Long timestamp) {
+		super();
+		this.action = action;
+		this.timestamp = timestamp;
+	}
+
 	public String getAction() {
 		return action;
 	}
